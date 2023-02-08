@@ -57,6 +57,11 @@ systemctl start nagios
 
 if you are using OS firewall then used below command or else hardware using then allow 80 port to open in firelwall
 First add your port 80 rule with the following linux command:
-# firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=80/tcp --permanent
 Once you add the above firewall rule, reload the firewall service with this command:
-# firewall-cmd --reload
+firewall-cmd --reload
+
+To access Nagios Core, open your browser and navigate to http://YOUR-IP-ADDRESS/nagios and log in using the nagiosadmin user account which you have created in one of the previous steps in this tutorial.
+
+After you have successfully logged in, you will be presented with the Nagios Core home screen as shown in the image below:
+
