@@ -1,13 +1,13 @@
 # nagios
 Nagios server installation step by step on Cent OS 7
-#Step 1: Connect to your server
+# Step 1: Connect to your server
 Connect to your server via SSH as user root, use the following command:
 ssh root@IP_ADDRESS
 Once logged in, make sure that your server is up-to-date by running the following command:
 
 yum update
 
-#Step 2: Install LAMP
+# Step 2: Install LAMP
 yum install httpd mariadb-server php php-mysql
 
 systemctl start httpd.service
@@ -17,10 +17,10 @@ systemctl enable mariadb.service
 
 mysql_secure_installation
 
-#Step 3: Install the required packages
+# Step 3: Install the required packages
 yum install gcc glibc glibc-common wget gd gd-devel perl postfix
 
-#Step 4: Download and Install Nagios Core
+# Step 4: Download and Install Nagios Core
 cd /tmp
 wget -O nagioscore.tar.gz https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.2.tar.gz
 tar xzf nagioscore.tar.gz
@@ -36,10 +36,10 @@ make install-commandmode
 make install-webconf
 systemctl restart httpd
 
-#Step 5: Create nagiosadmin User Account
+# Step 5: Create nagiosadmin User Account
 htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
 
-#Step 6: Install Nagios Plugins
+# Step 6: Install Nagios Plugins
 yum install gcc glibc glibc-common make gettext automake autoconf wget openssl-devel net-snmp net-snmp-utils epel-release perl-Net-SNMP
 
 cd /tmp
@@ -52,5 +52,11 @@ cd /tmp/nagios-plugins-release-2.2.1/
 make
 make install
 
-#Step 7: Accessing Nagios Core
+# Step 7: Accessing Nagios Core
 systemctl start nagios
+
+if you are using OS firewall then used below command or else hardware using then allow 80 port to open in firelwall
+First add your port 80 rule with the following linux command:
+# firewall-cmd --zone=public --add-port=80/tcp --permanent
+Once you add the above firewall rule, reload the firewall service with this command:
+# firewall-cmd --reload
